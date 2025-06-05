@@ -266,7 +266,7 @@ print(gdf_cube)
 
 
 ### Filtering data (e.g. on species)
-Check for a single species (Acacia melanoxylon R.Br.: https://www.gbif.org/species/2979000)
+Check for a single species (Acacia mearnsii De Wild.: https://www.gbif.org/species/2979775)
 
 
 ```python
