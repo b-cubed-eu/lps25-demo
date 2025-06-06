@@ -1,0 +1,51 @@
+---
+title: <span style="color:#005857"> LPS25 Demo - Biodiversity Data Cubes for Earth Science (22 June, 2025)
+subtitle: <span style="color:#47A52A"> Part 3: Hands-on training  on the `ebvcube` R package <br>  Install the packages for the hands-on training on the `ebvcube` R package
+description: "This notebook demonstrates how to install properly the `ebvcube` R package."
+author: 
+  - name: Luise Quoß, Lina Estupinan-Suarez"
+    affiliation: "German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig"
+    email: lina.estupinans@idiv.de
+institute: "**Institute**: German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig"
+date: "`r Sys.Date()`"
+output:
+ html_notebook:
+    highlight: tango
+---
+<img src="C:\gitrepo\B-Cubed_data_mobilization\input\logos\idiv+b3+EU.png" style='width: 400px; position:absolute; top:45px; right:0px; padding:5px;'/>
+---
+
+
+```{r}
+# Install Bioconductor packages (required for ebvcube)
+if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+BiocManager::install(c("rhdf5", "HDF5Array", "DelayedArray"))
+```
+
+```{r}
+# Install latest development version of ebvcube from GitHub (recommended)
+install.packages("devtools")
+devtools::install_github("https://github.com/LuiseQuoss/ebvcube/tree/dev")
+```
+
+```{r}
+# Install additional CRAN packages
+install.packages(c("readr", "terra", "ggplot2", "tidyverse", "stringr"))
+```
+
+```{r}
+# Installation complete message
+message("All required packages have been installed successfully.")
+```
+
+```{r}
+# Test if the libraries are loaded correctly
+library(ebvcube)
+library(readr)
+library(terra)
+library(ggplot2)
+library(tidyverse)
+library(stringr)
+```
+
+# If anything did not work, send an email to lina.estupinans@idiv.de

@@ -1,0 +1,83 @@
+{
+    "code": 200,
+    "message": "Preliminary metadata",
+    "data": {
+        "id": "86",
+        "naming_authority": "The German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig",
+        "title": "Test ",
+        "date_created": "2024-09-10",
+        "date_issued": "pending",
+        "summary": "test summary",
+        "references": "N/A",
+        "source": "test methods",
+        "coverage_content_type": [
+            "thematicClassification"
+        ],
+        "project": "N/A",
+        "project_url": "N/A",
+        "creator": {
+            "creator_name": "Lina Estupinan",
+            "creator_email": "lina.estupinans@idiv.de",
+            "creator_institution": "German Centre for Integrative Biodiversity Research (iDiv)",
+            "creator_country": "Germany"
+        },
+        "contributor_name": [
+            "N/A"
+        ],
+        "license": "https://creativecommons.org/licenses/by/4.0",
+        "publisher": {
+            "publisher_name": "Lina Estupinan Suarez",
+            "publisher_email": "lina.estupinans@idiv.de",
+            "publisher_institution": "German Centre for Integrative Biodiversity Research (iDiv)",
+            "publisher_country": "Germany"
+        },
+        "ebv": {
+            "ebv_class": "Species traits",
+            "ebv_name": "Morphology"
+        },
+        "ebv_entity": {
+            "ebv_entity_type": "Species",
+            "ebv_entity_scope": "test",
+            "ebv_entity_classification_name": "N/A",
+            "ebv_entity_classification_url": "N/A"
+        },
+        "ebv_metric": {
+            "ebv_metric_1": {
+                ":standard_name": "metric_1",
+                ":long_name": "metric_1",
+                ":units": "my_units"
+            },
+            "ebv_metric_2": {
+                ":standard_name": "metric_2",
+                ":long_name": "metric_2",
+                ":units": "my_units"
+            },
+            "ebv_metric_3": {
+                ":standard_name": "metric_3",
+                ":long_name": "metric_3",
+                ":units": "my_units"
+            }
+        },
+        "ebv_scenario": "N/A",
+        "ebv_geospatial": {
+            "ebv_geospatial_scope": "Continental/Regional",
+            "ebv_geospatial_description": "my area of interest"
+        },
+        "geospatial_lat_resolution": "pending",
+        "geospatial_lon_resolution": "pending",
+        "geospatial_bounds_crs": "pending",
+        "geospatial_lat_min": "pending",
+        "geospatial_lon_min": "pending",
+        "geospatial_lat_max": "pending",
+        "geospatial_lon_max": "pending",
+        "time_coverage": {
+            "time_coverage_resolution": "P0000-01-00",
+            "time_coverage_start": "2024-01-01",
+            "time_coverage_end": "2024-03-30"
+        },
+        "ebv_domain": [
+            "Terrestrial"
+        ],
+        "comment": "N/A"
+    }
+}

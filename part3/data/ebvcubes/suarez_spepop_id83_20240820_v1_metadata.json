@@ -1,0 +1,905 @@
+{
+    "code": 200,
+    "message": "Dataset with ID 83",
+    "data": [
+        {
+            "id": "83",
+            "naming_authority": "The German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig",
+            "title": "Occurrence Metrics for Invasive Alien Species of Union Concern in EU27: A 10 km prototype using GBIF occurrence cubes",
+            "doi": "10.25829\/w0vf54",
+            "date_created": "2024-08-14",
+            "date_issued": "2024-08-22",
+            "summary": "This dataset includes GBIF occurrences of species listed under Regulation (EU) 1143\/2014 on invasive alien species (IAS). The IAS list, adopted in 2016 and updated in 2017, 2019, and 2022, currently includes 88 species subject to strict environmental restrictions.For this study, we used the most recent IAS list from the European Topic Centre on Biodiversity and Ecosystems (ETC BE) and the European Environment Agency (EEA) as of June 2024. We matched these species' scientific names with the GBIF backbone taxonomy to obtain the accepted GBIF names and species keys.Using the GBIF API in R, we generated CSV cubes of species occurrences, applying the EEA spatial grid at a 10 km resolution. Monthly occurrence data were collected for 77 species, and the following metrics were calculated for each grid cell in the cube:\u2022 Total number of occurrences\u2022 Earliest date of occurrences\u2022 Latest date of occurrences\u2022 Basis of record for the earliest date of occurrences\u2022 Basis of record for the latest date of occurrencesThis dataset was developed by the Biodiversity Building Blocks for Policy (B3) project and was funded by the European Union\u2019s Horizon Europe Research and Innovation Programme (ID No 101059592).",
+            "keywords": [
+                "Invasive alien species of union concern",
+                "European Union",
+                "Species occurrence",
+                "Basis of record",
+                "Cube occurrence",
+                "GBIF records"
+            ],
+            "references": [
+                "10.15468\/dl.m4694q"
+            ],
+            "source": "These are the general steps to calculate the metrics of IAS of union concern based on GBIF records:1. The field Currently valid full name from the latest IAS list by ETC in June 2024 was matched against the GBIF backbone taxonomy [1]. Thus, we obtained the accepted scientific name in GBIF and the corresponding species key. All names had an EXACT match, but four of them were considered SYNONYMS. We replaced all four SYNONYMS with the corresponding ACCEPTED scientific name and species key. 2. Using the Species occurrence cubes software developed by B3 and GBIF [2], we created species occurrence cubes in a CSV format matching the EEA grid at 10 Km for records available from 1900 until mid June 2024. The query is in a JSON file and available at GitHub as well as the R script to submit the JSON query using GBIF API [3]. Importantly only records for 77 species were found.3. We loaded the CSV occurrence cubes using the b3gbi library, and calculated the following metrics: total number of occurrences, earliest date of records, latest date of records, basis of record of the earliest date, and basis of records of the latest date. 4. After rasterization of the metrics, data was converted to the EBVCube format.Steps 2 to 5 were conducted in R. All scripts are available at GitHub [3][1]https:\/\/www.gbif.org\/tools\/species-lookup[2]https:\/\/techdocs.gbif.org\/en\/data-use\/data-cubes[3]https:\/\/github.com\/EBVcube\/B-Cubed_data_mobilization",
+            "coverage_content_type": [
+                "referenceInformation",
+                "coordinate"
+            ],
+            "project_name": "Biodiversity Building Blocks for Policy (B3)",
+            "project_url": [
+                "https:\/\/b-cubed.eu\/"
+            ],
+            "creator": {
+                "creator_name": "Lina Estupinan-Suarez",
+                "creator_email": "lina.estupinans@gmail.com",
+                "creator_institution": "German Centre for Integrative Biodiversity Research (iDiv)",
+                "creator_url": "N\/A"
+            },
+            "contributor_name": [
+                "Miguel Fernandez",
+                "Luise Quoss",
+                "Emmanuel Oceguera"
+            ],
+            "license": "https:\/\/creativecommons.org\/licenses\/by\/4.0",
+            "publisher": {
+                "publisher_name": "Lina Estupinan Suarez",
+                "publisher_email": "lina.estupinans@idiv.de",
+                "publisher_institution": "German Centre for Integrative Biodiversity Research (iDiv)",
+                "publisher_url": "N\/A"
+            },
+            "ebv": {
+                "ebv_class": "Species populations",
+                "ebv_name": "Other"
+            },
+            "ebv_entity": {
+                "ebv_entity_type": "Species",
+                "ebv_entity_scope": "77 Invasive Alien Species of union concern (EU)",
+                "ebv_entity_classification_name": "GBIF Backbone Taxonomy",
+                "ebv_entity_classification_url": "N\/A",
+                "ebv_entity_names": [
+                    "Acacia saligna",
+                    "Acridotheres tristis",
+                    "Ailanthus altissima",
+                    "Alopochen aegyptiaca",
+                    "Alternanthera philoxeroides",
+                    "Ameiurus melas",
+                    "Andropogon virginicus",
+                    "Arthurdendyus triangulatus",
+                    "Asclepias syriaca",
+                    "Axis axis",
+                    "Baccharis halimifolia",
+                    "Cabomba caroliniana",
+                    "Callosciurus erythraeus",
+                    "Callosciurus finlaysonii",
+                    "Cardiospermum grandiflorum",
+                    "Cenchrus setaceus",
+                    "Corvus splendens",
+                    "Ehrharta calycina",
+                    "Elodea nuttallii",
+                    "Eriocheir sinensis",
+                    "Faxonius limosus",
+                    "Faxonius rusticus",
+                    "Faxonius virilis",
+                    "Fundulus heteroclitus",
+                    "Gambusia affinis",
+                    "Gambusia holbrooki",
+                    "Gunnera tinctoria",
+                    "Gymnocoronis spilanthoides",
+                    "Hakea sericea",
+                    "Heracleum mantegazzianum",
+                    "Heracleum persicum",
+                    "Heracleum sosnowskyi",
+                    "Humulus scandens",
+                    "Hydrocotyle ranunculoides",
+                    "Impatiens glandulifera",
+                    "Koenigia polystachya",
+                    "Lagarosiphon major",
+                    "Lampropeltis getula",
+                    "Lepomis gibbosus",
+                    "Lespedeza cuneata",
+                    "Lithobates catesbeianus",
+                    "Ludwigia grandiflora",
+                    "Ludwigia peploides",
+                    "Lygodium japonicum",
+                    "Lysichiton americanus",
+                    "Microstegium vimineum",
+                    "Muntiacus reevesi",
+                    "Myocastor coypus",
+                    "Myriophyllum aquaticum",
+                    "Myriophyllum heterophyllum",
+                    "Nasua nasua",
+                    "Prosopis juliflora",
+                    "Nyctereutes procyonoides",
+                    "Ondatra zibethicus",
+                    "Oxyura jamaicensis",
+                    "Pacifastacus leniusculus",
+                    "Parthenium hysterophorus",
+                    "Perccottus glenii",
+                    "Persicaria perfoliata",
+                    "Pistia stratiotes",
+                    "Pontederia crassipes",
+                    "Procambarus clarkii",
+                    "Procambarus virginalis",
+                    "Procyon lotor",
+                    "Pseudorasbora parva",
+                    "Pycnonotus cafer",
+                    "Rugulopteryx okamurae",
+                    "Salvinia molesta",
+                    "Sciurus carolinensis",
+                    "Sciurus niger",
+                    "Solenopsis invicta",
+                    "Tamias sibiricus",
+                    "Threskiornis aethiopicus",
+                    "Trachemys scripta",
+                    "Triadica sebifera",
+                    "Wasmannia auropunctata",
+                    "Xenopus laevis"
+                ],
+                "ebv_entity_taxonomy_levels": [
+                    "Species",
+                    "Genus",
+                    "Family",
+                    "Order",
+                    "Class",
+                    "Phylum",
+                    "Kingdom"
+                ],
+                "ebv_entity_taxonomy_table": [
+                    [
+                        "Acacia saligna",
+                        "Acacia",
+                        "Fabaceae",
+                        "Fabales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Acridotheres tristis",
+                        "Acridotheres",
+                        "Sturnidae",
+                        "Passeriformes",
+                        "Aves",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Ailanthus altissima",
+                        "Ailanthus",
+                        "Simaroubaceae",
+                        "Sapindales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Alopochen aegyptiaca",
+                        "Alopochen",
+                        "Anatidae",
+                        "Anseriformes",
+                        "Aves",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Alternanthera philoxeroides",
+                        "Alternanthera",
+                        "Amaranthaceae",
+                        "Caryophyllales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Ameiurus melas",
+                        "Ameiurus",
+                        "Ictaluridae",
+                        "Siluriformes",
+                        "",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Andropogon virginicus",
+                        "Andropogon",
+                        "Poaceae",
+                        "Poales",
+                        "Liliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Arthurdendyus triangulatus",
+                        "Arthurdendyus",
+                        "Geoplanidae",
+                        "Tricladida",
+                        "",
+                        "Platyhelminthes",
+                        "Animalia"
+                    ],
+                    [
+                        "Asclepias syriaca",
+                        "Asclepias",
+                        "Apocynaceae",
+                        "Gentianales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Axis axis",
+                        "Axis",
+                        "Cervidae",
+                        "Artiodactyla",
+                        "Mammalia",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Baccharis halimifolia",
+                        "Baccharis",
+                        "Asteraceae",
+                        "Asterales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Cabomba caroliniana",
+                        "Cabomba",
+                        "Cabombaceae",
+                        "Nymphaeales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Callosciurus erythraeus",
+                        "Callosciurus",
+                        "Sciuridae",
+                        "Rodentia",
+                        "Mammalia",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Callosciurus finlaysonii",
+                        "Callosciurus",
+                        "Sciuridae",
+                        "Rodentia",
+                        "Mammalia",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Cardiospermum grandiflorum",
+                        "Cardiospermum",
+                        "Sapindaceae",
+                        "Sapindales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Cenchrus setaceus",
+                        "Cenchrus",
+                        "Poaceae",
+                        "Poales",
+                        "Liliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Corvus splendens",
+                        "Corvus",
+                        "Corvidae",
+                        "Passeriformes",
+                        "Aves",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Ehrharta calycina",
+                        "Ehrharta",
+                        "Poaceae",
+                        "Poales",
+                        "Liliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Elodea nuttallii",
+                        "Elodea",
+                        "Hydrocharitaceae",
+                        "Alismatales",
+                        "Liliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Eriocheir sinensis",
+                        "Eriocheir",
+                        "Varunidae",
+                        "Decapoda",
+                        "Malacostraca",
+                        "Arthropoda",
+                        "Animalia"
+                    ],
+                    [
+                        "Faxonius limosus",
+                        "Faxonius",
+                        "Cambaridae",
+                        "Decapoda",
+                        "Malacostraca",
+                        "Arthropoda",
+                        "Animalia"
+                    ],
+                    [
+                        "Faxonius rusticus",
+                        "Faxonius",
+                        "Cambaridae",
+                        "Decapoda",
+                        "Malacostraca",
+                        "Arthropoda",
+                        "Animalia"
+                    ],
+                    [
+                        "Faxonius virilis",
+                        "Faxonius",
+                        "Cambaridae",
+                        "Decapoda",
+                        "Malacostraca",
+                        "Arthropoda",
+                        "Animalia"
+                    ],
+                    [
+                        "Fundulus heteroclitus",
+                        "Fundulus",
+                        "Fundulidae",
+                        "Cyprinodontiformes",
+                        "",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Gambusia affinis",
+                        "Gambusia",
+                        "Poeciliidae",
+                        "Cyprinodontiformes",
+                        "",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Gambusia holbrooki",
+                        "Gambusia",
+                        "Poeciliidae",
+                        "Cyprinodontiformes",
+                        "",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Gunnera tinctoria",
+                        "Gunnera",
+                        "Gunneraceae",
+                        "Gunnerales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Gymnocoronis spilanthoides",
+                        "Gymnocoronis",
+                        "Asteraceae",
+                        "Asterales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Hakea sericea",
+                        "Hakea",
+                        "Proteaceae",
+                        "Proteales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Heracleum mantegazzianum",
+                        "Heracleum",
+                        "Apiaceae",
+                        "Apiales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Heracleum persicum",
+                        "Heracleum",
+                        "Apiaceae",
+                        "Apiales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Heracleum sosnowskyi",
+                        "Heracleum",
+                        "Apiaceae",
+                        "Apiales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Humulus scandens",
+                        "Humulus",
+                        "Cannabaceae",
+                        "Rosales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Hydrocotyle ranunculoides",
+                        "Hydrocotyle",
+                        "Araliaceae",
+                        "Apiales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Impatiens glandulifera",
+                        "Impatiens",
+                        "Balsaminaceae",
+                        "Ericales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Koenigia polystachya",
+                        "Koenigia",
+                        "Polygonaceae",
+                        "Caryophyllales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Lagarosiphon major",
+                        "Lagarosiphon",
+                        "Hydrocharitaceae",
+                        "Alismatales",
+                        "Liliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Lampropeltis getula",
+                        "Lampropeltis",
+                        "Colubridae",
+                        "",
+                        "Squamata",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Lepomis gibbosus",
+                        "Lepomis",
+                        "Centrarchidae",
+                        "Perciformes",
+                        "",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Lespedeza cuneata",
+                        "Lespedeza",
+                        "Fabaceae",
+                        "Fabales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Lithobates catesbeianus",
+                        "Lithobates",
+                        "Ranidae",
+                        "Anura",
+                        "Amphibia",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Ludwigia grandiflora",
+                        "Ludwigia",
+                        "Onagraceae",
+                        "Myrtales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Ludwigia peploides",
+                        "Ludwigia",
+                        "Onagraceae",
+                        "Myrtales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Lygodium japonicum",
+                        "Lygodium",
+                        "Lygodiaceae",
+                        "Schizaeales",
+                        "Polypodiopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Lysichiton americanus",
+                        "Lysichiton",
+                        "Araceae",
+                        "Alismatales",
+                        "Liliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Microstegium vimineum",
+                        "Microstegium",
+                        "Poaceae",
+                        "Poales",
+                        "Liliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Muntiacus reevesi",
+                        "Muntiacus",
+                        "Cervidae",
+                        "Artiodactyla",
+                        "Mammalia",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Myocastor coypus",
+                        "Myocastor",
+                        "Myocastoridae",
+                        "Rodentia",
+                        "Mammalia",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Myriophyllum aquaticum",
+                        "Myriophyllum",
+                        "Haloragaceae",
+                        "Saxifragales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Myriophyllum heterophyllum",
+                        "Myriophyllum",
+                        "Haloragaceae",
+                        "Saxifragales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Nasua nasua",
+                        "Nasua",
+                        "Procyonidae",
+                        "Carnivora",
+                        "Mammalia",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Prosopis juliflora",
+                        "Prosopis",
+                        "Fabaceae",
+                        "Fabales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Nyctereutes procyonoides",
+                        "Nyctereutes",
+                        "Canidae",
+                        "Carnivora",
+                        "Mammalia",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Ondatra zibethicus",
+                        "Ondatra",
+                        "Cricetidae",
+                        "Rodentia",
+                        "Mammalia",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Oxyura jamaicensis",
+                        "Oxyura",
+                        "Anatidae",
+                        "Anseriformes",
+                        "Aves",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Pacifastacus leniusculus",
+                        "Pacifastacus",
+                        "Astacidae",
+                        "Decapoda",
+                        "Malacostraca",
+                        "Arthropoda",
+                        "Animalia"
+                    ],
+                    [
+                        "Parthenium hysterophorus",
+                        "Parthenium",
+                        "Asteraceae",
+                        "Asterales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Perccottus glenii",
+                        "Perccottus",
+                        "Odontobutidae",
+                        "Perciformes",
+                        "",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Persicaria perfoliata",
+                        "Persicaria",
+                        "Polygonaceae",
+                        "Caryophyllales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Pistia stratiotes",
+                        "Pistia",
+                        "Araceae",
+                        "Alismatales",
+                        "Liliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Pontederia crassipes",
+                        "Pontederia",
+                        "Pontederiaceae",
+                        "Commelinales",
+                        "Liliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Procambarus clarkii",
+                        "Procambarus",
+                        "Cambaridae",
+                        "Decapoda",
+                        "Malacostraca",
+                        "Arthropoda",
+                        "Animalia"
+                    ],
+                    [
+                        "Procambarus virginalis",
+                        "Procambarus",
+                        "Cambaridae",
+                        "Decapoda",
+                        "Malacostraca",
+                        "Arthropoda",
+                        "Animalia"
+                    ],
+                    [
+                        "Procyon lotor",
+                        "Procyon",
+                        "Procyonidae",
+                        "Carnivora",
+                        "Mammalia",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Pseudorasbora parva",
+                        "Pseudorasbora",
+                        "Cyprinidae",
+                        "Cypriniformes",
+                        "",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Pycnonotus cafer",
+                        "Pycnonotus",
+                        "Pycnonotidae",
+                        "Passeriformes",
+                        "Aves",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Rugulopteryx okamurae",
+                        "Rugulopteryx",
+                        "Dictyotaceae",
+                        "Dictyotales",
+                        "Phaeophyceae",
+                        "Ochrophyta",
+                        "Chromista"
+                    ],
+                    [
+                        "Salvinia molesta",
+                        "Salvinia",
+                        "Salviniaceae",
+                        "Salviniales",
+                        "Polypodiopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Sciurus carolinensis",
+                        "Sciurus",
+                        "Sciuridae",
+                        "Rodentia",
+                        "Mammalia",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Sciurus niger",
+                        "Sciurus",
+                        "Sciuridae",
+                        "Rodentia",
+                        "Mammalia",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Solenopsis invicta",
+                        "Solenopsis",
+                        "Formicidae",
+                        "Hymenoptera",
+                        "Insecta",
+                        "Arthropoda",
+                        "Animalia"
+                    ],
+                    [
+                        "Tamias sibiricus",
+                        "Tamias",
+                        "Sciuridae",
+                        "Rodentia",
+                        "Mammalia",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Threskiornis aethiopicus",
+                        "Threskiornis",
+                        "Threskiornithidae",
+                        "Pelecaniformes",
+                        "Aves",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Trachemys scripta",
+                        "Trachemys",
+                        "Emydidae",
+                        "",
+                        "Testudines",
+                        "Chordata",
+                        "Animalia"
+                    ],
+                    [
+                        "Triadica sebifera",
+                        "Triadica",
+                        "Euphorbiaceae",
+                        "Malpighiales",
+                        "Magnoliopsida",
+                        "Tracheophyta",
+                        "Plantae"
+                    ],
+                    [
+                        "Wasmannia auropunctata",
+                        "Wasmannia",
+                        "Formicidae",
+                        "Hymenoptera",
+                        "Insecta",
+                        "Arthropoda",
+                        "Animalia"
+                    ],
+                    [
+                        "Xenopus laevis",
+                        "Xenopus",
+                        "Pipidae",
+                        "Anura",
+                        "Amphibia",
+                        "Chordata",
+                        "Animalia"
+                    ]
+                ]
+            },
+            "ebv_metric": {
+                "ebv_metric_1": {
+                    ":standard_name": "Total occurrences",
+                    ":long_name": "Total number of occurrences in GBIF",
+                    ":units": "Number of occurrences"
+                },
+                "ebv_metric_2": {
+                    ":standard_name": "Earliest date of records",
+                    ":long_name": "Earliest date of records in GBIF",
+                    ":units": "Decimal dates (YYYYMM)"
+                },
+                "ebv_metric_3": {
+                    ":standard_name": "Latest date of records",
+                    ":long_name": "Latest date of records in GBIF",
+                    ":units": "Decimal dates (YYYYMM)"
+                },
+                "ebv_metric_4": {
+                    ":standard_name": "Basis of record earliest date of records",
+                    ":long_name": "Basis of record of the earliest date of records in GBIF. Below the coding: [1] \"HUMAN_OBSERVATION\" [2] \"LIVING_SPECIMEN\" [3] \"MACHINE_OBSERVATION\" [4] \"MATERIAL_CITATION\" [5] \"MATERIAL_SAMPLE\" [6] \"OBSERVATION\" [7] \"OCCURRENCE\" [8] \"PRESERVED_SPECIMEN\"",
+                    ":units": "Basis of record identifier (from 1 to 8)(see comments)"
+                },
+                "ebv_metric_5": {
+                    ":standard_name": "Basis of record latest date of records",
+                    ":long_name": "Basis of record of the latest date of records in GBIF. Below the coding. [1] \"HUMAN_OBSERVATION\" [2] \"LIVING_SPECIMEN\" [3] \"MACHINE_OBSERVATION\" [4] \"MATERIAL_CITATION\" [5] \"MATERIAL_SAMPLE\" [6] \"OBSERVATION\" [7] \"OCCURRENCE\" [8] \"PRESERVED_SPECIMEN\"",
+                    ":units": "Basis of record identifier (from 1 to 8)(see comments)"
+                }
+            },
+            "ebv_scenario": "N\/A",
+            "ebv_geospatial": {
+                "ebv_geospatial_scope": "Continental\/Regional",
+                "ebv_geospatial_description": "European Union (EU27 grid at 10 Km)"
+            },
+            "geospatial_lat_resolution": "10000 meter",
+            "geospatial_lon_resolution": "10000 meter",
+            "geospatial_bounds_crs": "EPSG:3035",
+            "geospatial_lat_min": "700000.0",
+            "geospatial_lon_min": "0",
+            "geospatial_lat_max": "7500000.0",
+            "geospatial_lon_max": "8400000.0",
+            "time_coverage": {
+                "time_coverage_resolution": "P0000-00-00",
+                "time_coverage_start": "1900-01-01",
+                "time_coverage_end": "2024-06-30"
+            },
+            "ebv_domain": [
+                "Terrestrial",
+                "Marine",
+                "Freshwater"
+            ],
+            "comment": "Of the 87 species included in the EU list of IAS of concern, we found data for 77 species through the generation of species occurrence cubes. From the remaining ten, two are subspecies (Herpestes javanicus auropunctatus; Vespa velutina nigrithorax) and one is a variety (Pueraria montana var. lobata) that cannot be identified by the speciesKey. For the others species there is no data in GBIF and therefore they were not included.Of the 77 species, 73 species have the same scientific name in the GBIF Backbone taxonomy and in the EEA updated offcial list. In other words the scientific name holds the category ACCEPTED. For the SYNONYMS, we used the ACCEPTED name in GBIF. Below the list of corresponding scientific names.1. ETC SCIENTIFIC NAME: Cortaderia selloana subsp. jubata (Lemoine) Testoni & Villamil; GBIF SCIENTIFIC NAME: Cortaderia jubata (Lemoine) Stapf2. ETC SCIENTIFIC NAME: Heracleum persicum Fischer; GBIF SCIENTIFIC NAME: Heracleum persicum Desf.3. ETC SCIENTIFIC NAME: Neltuma juliflora (Sw.) Raf.; GBIF SCIENTIFIC NAME: Prosopis juliflora (Sw.) DC.4. ETC SCIENTIFIC NAME: Urva auropunctata (Hodgson, 1836), GBIF SCIENTIFIC NAME: Herpestes javanicus subsp. auropunctatus (Hodgson, 1836)The 10 species with no records via the GBIF occurrence cube software are listed using the GBIF Backbone Taxonomy. If the scientific name differs from the ETC nomenclature this is indicated in square brackets.- Channa argus (Cantor, 1842)- Cortaderia jubata (Lemoine) Stapf [Cortaderia selloana subsp. jubata (Lemoine) Testoni & Villamil]- Limnoperna fortunei (Dunker, 1857)- Morone americana (Gmelin, 1789)- Plotosus lineatus (Thunberg, 1787)- Pueraria montana var. lobata (Willd.) Maesen & S.M.Almeida ex Sanjappa & Predeep- Solenopsis geminata (Fabricius, 1804)- Solenopsis richteri Forel, 1909- Herpestes javanicus subsp. auropunctatus (Hodgson, 1836) [Urva auropunctata (Hodgson, 1836)]- Vespa velutina nigrithorax Buysson, 1905***Coding for Basis of record[1] \"HUMAN_OBSERVATION\"[2] \"LIVING_SPECIMEN\"[3] \"MACHINE_OBSERVATION\"[4] \"MATERIAL_CITATION\"[5] \"MATERIAL_SAMPLE\"[6] \"OBSERVATION\"[7] \"OCCURRENCE\"[8] \"PRESERVED_SPECIMEN\"",
+            "dataset": {
+                "pathname": "\/83\/public\/suarez_spepop_id83_20240820_v1.nc",
+                "download": "portal.geobon.org\/data\/upload\/83\/public\/suarez_spepop_id83_20240820_v1.nc",
+                "metadata_json": "portal.geobon.org\/data\/upload\/83\/public\/metadata_v1.json",
+                "metadata_xml": "portal.geobon.org\/data\/upload\/83\/public\/metadata_v1.xml"
+            },
+            "file": {
+                "download": "portal.geobon.org\/data\/upload\/83\/public\/64460_v1.jpg"
+            }
+        }
+    ]
+}

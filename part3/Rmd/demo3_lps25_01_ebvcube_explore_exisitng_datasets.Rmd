@@ -1,0 +1,147 @@
+---
+title: <span style="color:#005857"> LPS25 Demo - Biodiversity Data Cubes for Earth Science (22 June, 2025)
+subtitle: <span style="color:#47A52A"> Part 3 - Hands-on training  on the `ebvcube` R package <br> Explore and subset dataset examples
+author: 
+  - name: Luise Quoß, Lina Estupinan-Suarez"
+    affiliation: "German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig"
+    email: lina.estupinans@idiv.de
+institute: "**Institute**: German Centre for Integrative Biodiversity Research (iDiv)"
+date: "`r Sys.Date()`"
+output:
+ html_notebook:
+    highlight: tango
+---
+
+
+### Introduction
+
+
+### Load Libraries
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE)
+```
+
+
+```{r}
+# install_packages.R
+rm(list=ls())
+gc()
+
+# Test if the libraries are loaded correctly
+library(ebvcube)
+library(readr)
+library(terra)
+library(ggplot2)
+library(tidyverse)
+library(ebvcube)
+library(here)
+```
+
+### Load datasets in the EBV Data Portal
+```{r}
+# See available datacubes in the EBV Data Portal
+# This will list all the available datacubes in the EBV Data Portal
+datasets <- ebv_download()
+
+# ID 47 corresponds to the data mobilisation of species occurrence data at GBIF
+# of invasive alien apecies list of union concern in the EU 
+# Download the dataset with ID 47
+ebv_download(id = datasets$id[47], outputdir = here("part3", "data", "ebvcubes"), verbose=FALSE)
+
+# Set the path to the file
+# file <- system.file(file.path("extdata","martins_comcom_subset.nc"), package="ebvcube")
+file <- here("part3", "data", "ebvcubes", "suarez_spepop_id83_20240820_v1.nc")
+
+# Read the properties of the file
+prop.file <- ebv_properties(file, verbose=FALSE)
+
+# Take a look at the general properties of the data set - there are more properties to discover!
+prop.file@general[1:4]
+
+slotNames(prop.file)
+```
+
+### Read an EBVCube in NetCDF format
+```{r}
+# Load the NetCDF file
+nc_file <- rast(file)
+
+# Print some information about the loaded file
+print(nc_file)
+
+plot(nc_file[[4]])
+```
+
+### Using the `ebvcube` package to explore and subset data
+
+#### Example 1: 
+```{r}
+# Read the paths of the inner datacubes
+datacubes <- ebv_datacubepaths(file, verbose=FALSE)
+datacubes
+```
+
+```{r}
+# Get the properties of the first datacube
+prop.dc <- ebv_properties(file, datacubes[1,1], verbose=FALSE)
+prop.dc@metric
+```
+
+```{r}
+# Plot the global map
+dc <- datacubes[1,1]
+# ebv_map(file, dc, entity=1, timestep = 1, classes = 9,
+#       verbose=FALSE, col_rev = TRUE)
+
+data <- ebv_read(file, datacubepath = dc, entity = 1, type = 'da')
+dim(data)
+```
+
+```{r}
+# Load subset from shapefile (Cameroon)
+shp <- system.file(file.path('extdata','subset_germany.shp'), package="ebvcube")
+# data.shp <- ebv_read_shp(file, dc, entity=1, shp = shp, timestep = c(1,2,3), verbose=FALSE)
+# dim(data.shp)
+
+# Very quick plot of the resulting raster plus the shapefile
+borders <- terra::vect(shp)
+# ggplot2::ggplot() +
+#   # tidyterra::geom_spatraster(data = data[[1]]) +
+  tidyterra::geom_spatvector(data = borders, fill = NA) +
+  ggplot2::scale_fill_fermenter(na.value=NA, palette = 'YlGn', direction = 1) +
+  ggplot2::theme_classic()
+```
+
+
+#### Example 2: Subset data for a specific region (e.g., Africa) and save as GeoTIFFs
+```{r}
+# Define the root directory for the example data
+newNc <- file.path(system.file(package = "ebvcube"),'extdata','test.nc')
+
+root <- system.file(file.path('extdata'), package = "ebvcube")
+tifs <- c('entity1.tif', 'entity2.tif', 'entity3.tif')
+tif_paths <- file.path(root, tifs)
+
+rin <- rast(tif_paths[3])
+plot(rin)
+# savePlot()
+
+# Define the extent for Africa (xmin, xmax, ymin, ymax)
+africa_extent <- ext(-19, 55, -36, 40)
+
+# Crop the raster to the Africa extent
+rout <- crop(rin, africa_extent)
+
+# Plot the cropped raster
+plot(rout)
+i <- 1
+
+for (i in 1:3){
+    rin <- rast(tif_paths[i])
+    rout <- crop(rin, africa_extent)
+    plot(rout)
+    # Save the cropped raster if you want as tiffs
+    writeRaster(rout, here(paste0("part3/data/tif/output/entity_", i,"_v2.tif")), overwrite=TRUE)
+    }
+```
+
