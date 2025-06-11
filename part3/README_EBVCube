@@ -1,0 +1,16 @@
+---
+LPS demo - 22 June 2025
+PROJECT: Biodiversity Building Blocks for Policy (B-Cubed)
+Lina Estupinan-Suarez, Luise Quoss
+German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig
+---
+
+This section contains various scripts for more in-depth interaction with the 'ebvcube' package. For the sake of time, we will work with the file '02_ebvcube_create_ebvcube_eu_ias.Rmd' during the sesesion. Below is a brief overview of the scripts.
+
+NOTE: Please install the 'ebvcube' library before attending the hands-on training.
+
+List of scripts:
+- 00_ebvcube_install_packages.Rmd: Script with details on how to correctly install the ebvcube package.
+- 01_ebvcube_explore_existing_datasets.Rmd: Examples of how to explore the ebvcubes available at the EBV Data Portal (https://portal.geobon.org/).
+- 02_ebvcube_create_ebvcube_africa.Rmd: an example of how to create an ebvcube with timesteps and using TIFS as the initial format.
+- 02_ebvcube_create_ebvcube_eu_ias.Rmd: Example of how to create an ebvcube with taxonomy and using TIFS as the initial format. NOTE: This script is the

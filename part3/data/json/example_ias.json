@@ -1,0 +1,89 @@
+{
+    "code": 200,
+    "message": "Example metadata for hands-on training",
+    "data": {
+        "id": "83",
+        "naming_authority": "The German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig",
+        "title": "Occurrence metrics for invasive alien species of union concern: : Prototype for EU27 countries using GBIF Occurrence Cubes resampled at 100 Km",
+        "date_created": "2024-08-14",
+        "date_issued": "pending",
+        "summary": "This dataset covers GBIF occurrences of species listed in the Regulation (EU) 1143/2014 on invasive alien species (IAS), which specifies the measures to be taken by Member States to control IAS (European Parliament 2014).  Initially, the list of IAS of Union concern was adopted in 2016 and has since been updated in 2017, 2019 and 2022. There are currently 88 IAS subject to strict environmental restrictions on their trade, keeping, breeding, cultivation and release into the environment.\\r\\n\\r\\nHere, we used the latest updated list of IAS from the European Topic Centre on Biodiversity and Ecosystems (ETC BE) and the European Environment Agency (EEA) available in June 2024. The currently valid scientific name was matched to the with the GBIF backbone taxonomy. Thus, we obtained the accepted GBIF scientific name and the corresponding species key for all species included in the regulation.\\r\\n\\r\\nWe created the CSV cubes of species occurrence through the GBIF API from R, and used the EEA spatial grid at 10 km, later resampled at 100 km. We obtained monthly occurrence data for 77 species and calculated the following metrics:\\r\\n- Total number of occurrences\\r\\n- Earliest date of occurrences\\r\\n- Latest date of occurrences\\r\\n- Basis of record of the earliest date of occurrences\\r\\n- Basis of record of of the latest date of occurrences\\r\\n\\r\\nThis dataset was created by the Biodiversity Building Blocks for Policy (B3) project and funded by the",
+        "references": [
+            "https://doi.org/10.15468/dl.m4694q"
+        ],
+        "source": "These are the general steps to calculate the metrics of IAS of union concern based on GBIF records:\\r\\n\\r\\n1. The field  Currently valid full name from the latest IAS list by ETC in June 2024 was matched against the GBIF backbone taxonomy [1]. Thus, we obtained the accepted scientific name in GBIF and the corresponding species key.  All names had an EXACT match, but four of them were considered SYNONYMS. We replaced all four SYNONYMS with the corresponding ACCEPTED scientific name and species key. \\r\\n\\r\\n2. Using the Species occurrence cubes software developed by B3 and GBIF [2], we created species occurrence cubes in a CSV format matching the EEA grid at 100 Km for records available from 1900 until mid June 2024. The query is in a JSON file and available at GitHub as well as the R script to submit the JSON query using GBIF API [3]. Importantly only records for 77 species were found.\\r\\n\\r\\n3. We loaded the CSV occurrence cubes using the b3gbi library, and calculated the following metrics: total number of occurrences, earliest date of records, latest date of records, basis of record of the earliest date, and basis of records of the latest date. \\r\\n\\r\\n4. After rasterization of the metrics, data was converted to the EBVCube format.\\r\\n\\r\\nSteps 2 to 5 were conducted in R. All scripts are available at GitHub [3]\\r\\n\\r\\n[1]https://www.gbif.org/tools/species-lookup\\r\\n[2]https://techdocs.gbif.org/en/data-use/data-cubes\\r\\n[3]https://github.com/EBVcube/B-Cubed_data_mobilization",
+        "coverage_content_type": [
+            "referenceInformation",
+            "coordinate"
+        ],
+        "project": "Biodiversity Building Blocks for Policy (B3)",
+        "project_url": "https://b-cubed.eu/",
+        "creator": {
+            "creator_name": "Lina Estupinan-Suarez",
+            "creator_email": "lina.estupinans@gmail.com",
+            "creator_institution": "German Centre for Integrative Biodiversity Research (iDiv)",
+            "creator_country": "Germany"
+        },
+        "contributor_name": [
+            "Name 1",
+            "Name 2"
+        ],
+        "license": "https://creativecommons.org/licenses/by/4.0",
+        "publisher": {
+            "publisher_name": "Lina Estupinan Suarez",
+            "publisher_email": "lina.estupinans@idiv.de",
+            "publisher_institution": "German Centre for Integrative Biodiversity Research (iDiv)",
+            "publisher_country": "Germany"
+        },
+        "ebv": {
+            "ebv_class": "Species populations",
+            "ebv_name": "Other"
+        },
+        "ebv_entity": {
+            "ebv_entity_type": "Species",
+            "ebv_entity_scope": "77 Invasive Alien Species of union concern (EU)",
+            "ebv_entity_classification_name": "GBIF Backbone Taxonomy",
+            "ebv_entity_classification_url": "N/A"
+        },
+        "ebv_metric": {
+            "ebv_metric_1": {
+                ":standard_name": "total_occurrences",
+                ":long_name": "Total number of occurrences in GBIF",
+                ":units": "Number of occurrences"
+            },
+            "ebv_metric_2": {
+                ":standard_name": "earliest_date_of_records",
+                ":long_name": "Earliest date of records in GBIF\r\n",
+                ":units": "Decimal dates (YYYYMM)"
+            },
+            "ebv_metric_3": {
+                ":standard_name": "latest_date_of_records",
+                ":long_name": "Latest date of records in GBIF",
+                ":units": "Decimal dates (YYYYMM)"
+            }
+        },
+        "ebv_scenario": "N/A",
+        "ebv_geospatial": {
+            "ebv_geospatial_scope": "Continental/Regional",
+            "ebv_geospatial_description": "European Union (EU27 grid at 100 Km)"
+        },
+        "geospatial_lat_resolution": "pending",
+        "geospatial_lon_resolution": "pending",
+        "geospatial_bounds_crs": "pending",
+        "geospatial_lat_min": "pending",
+        "geospatial_lon_min": "pending",
+        "geospatial_lat_max": "pending",
+        "geospatial_lon_max": "pending",
+        "time_coverage": {
+            "time_coverage_resolution": "P0000-00-00",
+            "time_coverage_start": "1900-01-01",
+            "time_coverage_end": "2024-06-30"
+        },
+        "ebv_domain": [
+            "Terrestrial",
+            "Marine",
+            "Freshwater"
+        ],
+        "comment": "Of the 88 species included in the EU list of IAS of concern, we found data for 77 species through the generation of species occurrence cubes. For sake of simplicity, we only include the first 5 species in the example metadata. The full dataset is available at the provided DOI."
+    }
+}

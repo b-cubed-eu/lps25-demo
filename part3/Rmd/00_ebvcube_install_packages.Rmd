@@ -3,7 +3,7 @@ title: <span style="color:#005857"> LPS25 Demo - Biodiversity Data Cubes for Ear
 subtitle: <span style="color:#47A52A"> Part 3: Hands-on training  on the `ebvcube` R package <br>  Install the packages for the hands-on training on the `ebvcube` R package
 description: "This notebook demonstrates how to install properly the `ebvcube` R package."
 author: 
-  - name: Luise Quoß, Lina Estupinan-Suarez"
+  - name: Luise Quoß, Lina Estupinan-Suarez
     affiliation: "German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig"
     email: lina.estupinans@idiv.de
 institute: "**Institute**: German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig"

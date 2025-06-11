@@ -2,7 +2,7 @@
 title: <span style="color:#005857"> LPS25 Demo - Biodiversity Data Cubes for Earth Science (22 June, 2025)
 subtitle: <span style="color:#47A52A"> Part 3 - Hands-on training  on the `ebvcube` R package <br>  Script to create EBVCubes from tif files
 author: 
-  - name: Luise Quoß, Lina Estupinan-Suarez"
+  - name: Luise Quoß, Lina Estupinan-Suarez
     affiliation: "German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig"
     email: lina.estupinans@idiv.de
 institute: "**Institute**: German Centre for Integrative Biodiversity Research (iDiv)"
@@ -11,9 +11,6 @@ output:
  html_notebook:
     highlight: tango
 ---
-
-
-### Introduction
 
 
 ### Load Libraries
@@ -60,7 +57,7 @@ nc <- here("part3/data/ebvcubes/ebvcube_example.nc") #if error: add one dot and 
 ### 2. Plot data ----
 ```{r}
 tifs <- c('entity_1.tif', 'entity_2.tif', 'entity_3.tif') # 3 entities for one metric
-tif_paths <- file.path(here("part3/data/tif/input"), tifs) #if error: add one dot and try again
+tif_paths <- file.path(here("part3/data/tif/input/africa"), tifs) #if error: add one dot and try again
 rin <- rast(here(tif_paths[1]))
 plot(rin)
 ```
@@ -92,10 +89,24 @@ ebv_create(jsonpath = json,
 # Check out the (still empty) datacubes that are available
 dc_new <- ebv_datacubepaths(nc, verbose=FALSE)
 print(dc_new)
+```
 
-# Check metadata
+
+### 4. Check metadata
+```{r}
+# Check the metadata of the newly created EBVCube
 prop <- ebv_properties(nc, metric=3, verbose=FALSE)
+
+# Print the properties of the EBVCube
+print(prop@general)
+
+# Print the metric information
+print(prop@metric)
+
+# Print the spatial and temporal information
 print(prop@spatial)
+
+print(prop@temporal)
 ```
 
 
@@ -131,4 +142,4 @@ mycube <- ebv_read(filepath = nc,
                   timestep = c(1,2),
                   type='r',
                    )
- ```    
+```    

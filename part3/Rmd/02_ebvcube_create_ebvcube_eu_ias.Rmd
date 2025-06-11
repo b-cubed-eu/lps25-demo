@@ -1,0 +1,204 @@
+---
+title: <span style="color:#005857"> LPS25 Demo - Biodiversity Data Cubes for Earth Science (22 June, 2025)
+subtitle: <span style="color:#47A52A"> Part 3 - Hands-on training  on the `ebvcube` R package <br>  Script to create EBVCubes from tif files
+author: 
+  - name: Lina Estupinan-Suarez, Luise Quoß
+    affiliation: "German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig"
+    email: lina.estupinans@idiv.de
+institute: "**Institute**: German Centre for Integrative Biodiversity Research (iDiv)"
+date: "`r Sys.Date()`"
+output:
+ html_notebook:
+    highlight: tango
+---
+
+
+### Load Libraries
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE)
+```
+
+```{r}
+# Activate to clean your envirionment
+rm(list=ls())
+gc()
+```
+
+```{r}
+# Load packages
+library(ebvcube)
+library(terra)
+library(jsonlite)
+library(here)
+```
+
+```{r}
+# Check if working directory point to this code-folder
+getwd()
+# If not, run the following line of code
+# This only runs if you are using RStudio, else use setwd("your/path/to/ebv-workshop2024-main/code")
+# setwd(dirname(rstudioapi::getSourceEditorContext()$path))
+```
+
+
+### 1. Prepare all inputs ----
+
+Define paths for reading input data and saving the results.
+```{r}
+# Path to EBV metadata as JSON
+json <- here("part3/data/json/example_ias.json") #if error: add one dot and try again
+# json_data <- fromJSON(txt=json) # in case you want to read the jsonfile
+
+# Path to tiffs
+pathin <- here("part3/data/tif/input/ias_5sps") #if error: add one dot and try again
+
+# Path to the EBVCube output
+nc <- here("part3/data/ebvcubes/ebvcube_example_ias.nc") #if error: add one dot and try again
+
+# Path to the taxonomy file
+tax <- file.path(here("part3/data/taxonomy/example_ias_5species.csv"))
+```
+
+Load species taxonomy.
+
+```{r}
+# Species key to sort the data
+# spskey <- names(r1)
+spstax <- read.csv(tax)
+spstax$species_key <- paste0(10000, 1:nrow(spstax)) # create a key for the species
+
+
+# # Check whether the spskey order is the same
+# spstax$species == spskey
+```
+
+
+### 2. Plot data ----
+```{r}
+# tifs <- c('entity_1.tif', 'entity_2.tif', 'entity_3.tif') # 3 entities for one metric
+tifs <- c('01_ias_total_occurrences.tif', '02_ias_earliest_date_records.tif', '03_ias_latest_date_records.tif') # 3 metrics
+tif_paths <- file.path(here("part3/data/tif/input/ias_5sps"), tifs)
+
+# Load the first tif to check the data
+rin <- rast(here(tif_paths[1])) # Load only the first band for plotting
+spskey <- names(rin)
+
+# Plot the first tif
+plot(rin)
+
+spstax$species_key <- spskey
+```
+
+### 3. Create EBVCube netCDF ----
+Define raster settings and create the EBVCube structure. This netCDF has no data. The data will be added in the next step.
+
+```{r}
+# Defining the fillvalue - optional
+fillvalue <- -3.4e+38
+
+# Define geographical extent and coordinate system
+extent <- c(ext(rin)[1], ext(rin)[2], ext(rin)[3], ext(rin)[4])
+res <- res(rin)
+epsg <- 3035
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      fillvalue <- NaN
+# Define the precision of the data
+prec <- 'integer'
+sep <- ','
+```
+
+Create the empty EBVCube structure.
+```{r}
+# Define entity-names
+# entities <- c('01_ias_total_occurrences', '02_ias_earliest_date_records', '03_ias_latest_date_records')
+
+# Create empty file (no data yet)
+ebv_create_taxonomy(jsonpath = json,
+           outputpath = nc,
+           taxonomy = tax,
+           epsg = epsg,
+           extent = extent,
+           resolution = res,
+           fillvalue = fillvalue,
+           prec = prec,
+           sep = sep,
+           overwrite = TRUE,
+           verbose = FALSE # set to TRUE to see additional messages
+           )
+
+# Check out the (still empty) datacubes that are available
+dc_new <- ebv_datacubepaths(nc, verbose=FALSE)
+print(dc_new)
+```
+
+
+### 4. Check metadata
+```{r}
+# Check data
+ebv_datacubepaths(nc)
+# ebv_properties(nc, metric=1)
+```
+
+
+```{r}
+# Check the metadata of the newly created EBVCube
+prop <- ebv_properties(nc, metric=3, verbose=FALSE)
+
+# Print the properties of the EBVCube
+print(prop@general)
+
+# Print the spatial information
+print(prop@spatial)
+
+# Print the temporal information
+print(prop@temporal)
+```
+
+
+### 4. Add data to the (empty) netCDF ----
+
+```{r}
+# Add data -----
+# Get entity names
+entity_names <- ebv_properties(nc, verbose=F)@general$entity_names
+```
+
+Map input data to the empty NetCDF
+```{r}
+for(i in 1:length(spskey)){
+print(i)
+spx <- which(spskey == spstax[["species_key"]][i])
+  ebv_add_data(filepath_nc = nc,
+               data = terra::as.matrix(rast(here(tif_paths[1]))[[i]], wide = T),
+               metric = 1,
+               entity = i,
+               timestep = 1,
+               ignore_RAM = T)
+
+  ebv_add_data(filepath_nc = nc,
+               data = terra::as.matrix(rast(here(tif_paths[2]))[[i]], wide = T),
+               metric = 2,
+               entity = i,
+               timestep = 1,
+               ignore_RAM = T)
+
+  ebv_add_data(filepath_nc = nc,
+               data = terra::as.matrix(rast(here(tif_paths[3]))[[i]], wide = T),
+               metric = 3,
+               entity = i,
+               timestep = 1,
+               ignore_RAM = T)
+}
+```
+
+
+### 5. Check your recently created EBVCube
+```{r}
+# Load the new cube
+new_cubepaths <- ebv_datacubepaths(filepath = nc)
+
+mycube <- ebv_read(filepath = nc,
+                  datacubepath = new_cubepaths[1,1],
+                  entity = 1,
+                  type = 'a'
+                   )
+```    

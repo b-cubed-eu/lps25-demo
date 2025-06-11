@@ -2,7 +2,7 @@
 title: <span style="color:#005857"> LPS25 Demo - Biodiversity Data Cubes for Earth Science (22 June, 2025)
 subtitle: <span style="color:#47A52A"> Part 3 - Hands-on training  on the `ebvcube` R package <br> Explore and subset dataset examples
 author: 
-  - name: Luise Quoß, Lina Estupinan-Suarez"
+  - name: Luise Quoß, Lina Estupinan-Suarez
     affiliation: "German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig"
     email: lina.estupinans@idiv.de
 institute: "**Institute**: German Centre for Integrative Biodiversity Research (iDiv)"
@@ -12,8 +12,6 @@ output:
     highlight: tango
 ---
 
-
-### Introduction
 
 
 ### Load Libraries
