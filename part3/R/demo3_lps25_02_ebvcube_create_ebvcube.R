@@ -22,18 +22,18 @@ setwd(dirname(rstudioapi::getSourceEditorContext()$path))
 
 # 1. Define paths ----
 # Path to EBV metadata as JSON
-json <- "../data/input/json/test.json" #if error: add one dot and try again
+json <- "../data/json/example.json" #if error: add one dot and try again
 # json_data <- fromJSON(txt=json) # in case you want to read the jsonfile
 
 # Path to Tiffs
-pathin <- "../data/input/tif/" #if error: add one dot and try again
+pathin <- "../data/tif/input/" #if error: add one dot and try again
 
 # Path to the EBVCube output
-nc <- "../data/output/ebvcube_test.nc" #if error: add one dot and try again
+nc <- "../data/ebvcubes/ebvcube_test.nc" #if error: add one dot and try again
 
 # 2. Plot data ----
 tifs <- c('entity_1.tif', 'entity_2.tif', 'entity_3.tif') # 3 entities for one metric
-tif_paths <- file.path("../data/input/tif", tifs) #if error: add one dot and try again
+tif_paths <- file.path("../data/tif/input/africa", tifs) #if error: add one dot and try again
 rin <- rast(tif_paths[1])
 plot(rin)
 
@@ -94,6 +94,8 @@ new_cubepaths <- ebv_datacubepaths(filepath = nc)
 mycube <- ebv_read(filepath = nc,
                   datacubepath = new_cubepaths[1,1],
                   entity = 1,
-                  timestep = c(1,2),
+                  timestep = c(1,3),
                   type='r',
-                   )
+                  )
+
+plot(mycube)
