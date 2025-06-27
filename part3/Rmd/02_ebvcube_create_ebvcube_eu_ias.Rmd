@@ -30,6 +30,8 @@ library(ebvcube)
 library(terra)
 library(jsonlite)
 library(here)
+library(ggplot2)
+library(sf)
 ```
 
 ```{r}
@@ -83,11 +85,36 @@ tif_paths <- file.path(here("part3/data/tif/input/ias_5sps"), tifs)
 rin <- rast(here(tif_paths[1])) # Load only the first band for plotting
 spskey <- names(rin)
 
-# Plot the first tif
-plot(rin)
-
 spstax$species_key <- spskey
 ```
+
+
+```{r}
+# Import and convert the EU borders to a data frame
+borders_eu <- st_read("C:/data/grid/eea_v_3035_100_k_adm-boundaries-eea38-plus_i_2018-2020_v01_r00/NUTS2021_3035.shp")
+
+# Select one species to plot
+i <- 1
+
+# Plot the first tif
+df <- as.data.frame(rin[[i]], xy=TRUE)
+spskey[i]
+colnames(df) <- c("x", "y", "Values")
+
+# plot
+ggplot() +
+geom_sf(data = borders_eu, fill = "#cac6c6") +
+geom_raster(data = df, aes(x = x, y = y, fill = Values)) +
+geom_sf(data = borders_eu, fill = NA, color = "white") +
+scale_fill_distiller(name="Total occurrences", palette="RdPu") +
+theme_minimal() +
+labs(
+title = paste0("Total Number of Occurrences of ", spskey[i], " in GBIF"),
+x = "Latitude",
+y = "Longitude",
+fill = "Total <br> occurrences")
+```
+
 
 ### 3. Create EBVCube netCDF ----
 Define raster settings and create the EBVCube structure. This netCDF has no data. The data will be added in the next step.

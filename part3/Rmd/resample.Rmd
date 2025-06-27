@@ -1,0 +1,32 @@
+## Script to Resample TIF Files
+
+### Load Libraries
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE)
+```
+
+```{r}
+# Resample tif file from 1km to 10km resolution
+library(terra)  
+
+# List files in the subdirectory
+list_tifs <- list.files(here("part3/data/tif/input/ias_5sps"), pattern = "\\.tif$", full.names = TRUE)
+
+i <- 1
+
+for (i in 1:3){
+  # Load the raster file
+  raster_data <- rast(list_tifs[i])
+  
+  # Resample the raster to a new resolution (100 km)
+  new_resolution <- 10000  # in meters
+  resampled_raster <- aggregate(raster_data, fact = new_resolution / res(raster_data)[1], fun = mean)
+  
+  # Define output file path
+  output_file <- paste0(sub("input", "output", list_tifs[i]))
+
+  # Save the resampled raster to a new file
+  writeRaster(resampled_raster[[1:5]], output_file, overwrite = TRUE)
+  print(i)
+}
+

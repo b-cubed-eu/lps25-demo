@@ -1,6 +1,7 @@
 # Living Planet Symposium 2025 demo
 
 This repository contains the materials related to the B-Cubed hands-on training session "**Biodiversity Data Cubes for Earth Science: From SQL Queries to Standardized Geospatial Output**" presented on the Living Planet Symposium 2025 on 22 June in Vienna.
+[Here](https://docs.google.com/presentation/d/1yla7z9sb1T-5Yzo9aJadxVc0o8aT9R2S/edit?usp=sharing&ouid=105200754965009272572&rtpof=true&sd=true) is the link to the presentation.
 
 ## Running the general demo
 
